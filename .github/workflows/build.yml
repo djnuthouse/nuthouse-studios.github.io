@@ -1,1 +1,26 @@
-yml
+name: Verify Docker Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-docker:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build image (test only)
+      run: docker build -t nuthouse-studios:test .
+
+    - name: Verify container startup
+      run: |
+        docker run -d -p 5000:5000 nuthouse-studios:test
+        sleep 10
+        curl -f http://localhost:5000/api/status || exit 1
