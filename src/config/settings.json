@@ -1,1 +1,7 @@
-js
+{
+  "app_name": "Nuthouse Studios",
+  "version": "1.0.0",
+  "author": "Djnuthouse",
+  "description": "Master Controller Agent for maintaining, constructing, and developing systematic databases",
+  "server_port": 5000
+}
